@@ -12,8 +12,7 @@ end
 vim.opt.rtp:prepend(lazypath)
 
 -- disable confirmation message when plugin files are saved
--- require("lazy").setup({{import = "michael.plugins"}, {import = "michael.plugins.lsp"}}, {
-require("lazy").setup("michael.plugins", {
+require("lazy").setup({{import = "michael.plugins"}, {import = "michael.plugins.lsp"}}, {
   -- checks for plugin updates
   -- checker = {
     -- enabled = true,
