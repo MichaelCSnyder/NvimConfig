@@ -6,7 +6,7 @@ return {
     },
 
     config = function()
-        local mason = require("mason") 
+        local mason = require("mason")
         local mason_lspconfig = require("mason-lspconfig")
 
         mason.setup({
@@ -24,6 +24,7 @@ return {
           "ts_ls",
           "html",
           "cssls",
+          "lua_ls"
         }
       })
     end
