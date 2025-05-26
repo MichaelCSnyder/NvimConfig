@@ -7,5 +7,5 @@
 ### Helpful Tips
 - Run ```:Lazy``` to enter the Lazy UI for managing plugins
 - Run ```:Mason``` to enter the Mason UI for installing LSPs, DAPs, Formatters, etc.
-- Run ```:LspInfo``` to inspect installed LSPs, which are active, and the buffers on which they are attached.
+- Run ```:LspInfo``` to inspect installed LSPs, which are active, and the buffers on which they are attached
 
