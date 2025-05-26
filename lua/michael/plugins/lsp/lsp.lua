@@ -27,10 +27,11 @@ return {
     mason_lspconfig.setup({
       ensure_installed = {
         "ts_ls",
-        -- "lua_ls",
+        "lua_ls",
         "jsonls",
         "html",
         "cssls",
+        "marksman",
       },
     })
 
@@ -40,6 +41,7 @@ return {
       "jsonls",
       "html",
       "cssls",
+      "marksman",
     }
     -- This runs when an LSP connects to a buffer
     local on_attach = function(client, bufnr)
