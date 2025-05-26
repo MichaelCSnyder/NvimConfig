@@ -9,10 +9,8 @@ local keymap = vim.keymap -- for conciseness
 vim.keymap.set("v", "J", ":m '>+1<CR>gv=gv")
 vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 
-vim.keymap.set("n", "<leader>d", "\"_d")
-vim.keymap.set("n", "<leader>p", "\"0p")
-vim.keymap.set("v", "<leader>d", "\"_d")
-vim.keymap.set("v", "<leader>p", "\"0p")
+vim.keymap.set({"n", "v"}, "<leader>d", "\"_d")
+vim.keymap.set({"n", "v"}, "<leader>p", "\"0p")
 
 -- clear search highlights
 keymap.set("n", "<leader>nh", ":nohl<CR>", { desc = "Clear search highlights" })
