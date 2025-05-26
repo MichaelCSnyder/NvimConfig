@@ -1,4 +1,4 @@
--- improves tabs UI
+-- improves tabs appearance
 return {
   "akinsho/bufferline.nvim",
   dependencies = { "nvim-tree/nvim-web-devicons" },
