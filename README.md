@@ -1,8 +1,8 @@
 # Neovim Config
 > [!WARNING]
 > Use ```:Lazy restore``` (or the equivalent command in the ```:Lazy``` gui) to restore plugins to the state in lazy-lock.json to prevent updates causing breaking changes.
-> If you wish to update a specific plugin, you can do so with ```:Lazy update [plugin-name.nvim]```
-> For the same reason, avoid updating mason language servers.
+> If you wish to update a specific plugin, you can do so with ```:Lazy update [plugin-name.nvim]```.
+> For the same reason, avoid blindly updating mason language servers unless prepared to update configurations.
 
 ### Helpful Tips
 - Run ```:Lazy``` to enter the Lazy UI for managing plugins
