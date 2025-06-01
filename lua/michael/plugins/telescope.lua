@@ -15,6 +15,7 @@ return {
   config = function()
     local telescope = require("telescope")
     local actions = require("telescope.actions")
+    local builtin = require("telescope.builtin")
 
     telescope.setup({
       defaults = {
@@ -44,5 +45,7 @@ return {
     keymap.set("n", "<leader>fr", "<cmd>Telescope oldfiles<cr>", { desc = "Fuzzy find recent files" })
     keymap.set("n", "<leader>fg", "<cmd>Telescope live_grep<cr>", { desc = "Find grep string in cwd" })
     keymap.set("n", "<leader>fc", "<cmd>Telescope grep_string<cr>", { desc = "Find string under cursor in cwd" })
+    keymap.set("n", "<leader>fs", builtin.lsp_document_symbols, { desc = "Find string under cursor in cwd" })
+    keymap.set("n", "<leader>fb", builtin.git_bcommits, { desc = "Find string under cursor in cwd" })
   end,
 }

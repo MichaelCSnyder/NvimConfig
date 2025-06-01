@@ -82,8 +82,9 @@ return {
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(event)
         local bufnr = event.buf
-        local client = vim.lsp.get_client_by_id(event.data.client_id)
+        local client = vim.lsp.get_client_by_id(event.data.client_id) or {name = ""}
         local opts = { buffer = bufnr, silent = true }
+        print("LSP attached: " .. client.name)
 
         opts.desc = "LSP: Show definitions"
         vim.keymap.set("n", "gd", vim.lsp.buf.definition, opts)
@@ -124,6 +125,7 @@ return {
         opts.desc = "LSP: Restart LSP"
         vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
+        client.server_capabilities.semanticTokensProvider = nil
         -- Optional: per-client logic
         -- if client.name == "ts_ls" then
         --   -- Disable ts_ls formatting if using prettier
