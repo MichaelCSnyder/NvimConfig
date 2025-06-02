@@ -3,9 +3,10 @@ return {
   dependencies = {
     "mason-org/mason.nvim",
     "mason-org/mason-lspconfig.nvim",
-    "hrsh7th/cmp-nvim-lsp", -- facilitates communication between lsp and autocompletion
+    "hrsh7th/cmp-nvim-lsp",                                   -- facilitates communication between lsp and autocompletion
     { "antosha417/nvim-lsp-file-operations", config = true }, -- modify imports when files have been renamed
-    { "folke/neodev.nvim", opts = {} }, -- add improved lua lsp functionality
+    { "folke/neodev.nvim",                   opts = {} },     -- add improved lua lsp functionality
+    "WhoIsSethDaniel/mason-tool-installer.nvim",              -- allows for installation of formatters
   },
   event = { "BufReadPre", "BufNewFile" },
   config = function()
@@ -31,14 +32,25 @@ return {
       automatic_enable = false, -- elect to setup servers myself to be able to pass cmp (autocomplete) capabilities
     })
 
+    local mason_tool_installer = require("mason-tool-installer")
+
+    mason_tool_installer.setup({
+      ensure_installed = {
+        "prettier", -- prettier formatter
+        "stylua",   -- lua formatter
+      },
+    })
+
     local lspconfig = require("lspconfig")
+
     local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
     local standard_config_servers = {
-        "ts_ls",
-        "jsonls",
-        "html",
-        "cssls",
-        "marksman",
+      "ts_ls",
+      "jsonls",
+      "html",
+      "cssls",
+      "marksman",
     }
 
     -- setup LSPs with default configs
@@ -54,7 +66,7 @@ return {
       settings = {
         Lua = {
           diagnostics = {
-            globals = {"vim"}, -- supposed to add the vim keyword to the globally recognized list. Not working.
+            globals = { "vim" }, -- supposed to add the vim keyword to the globally recognized list. Not working.
           }
         }
       },
@@ -82,7 +94,7 @@ return {
     vim.api.nvim_create_autocmd("LspAttach", {
       callback = function(event)
         local bufnr = event.buf
-        local client = vim.lsp.get_client_by_id(event.data.client_id) or {name = ""}
+        local client = vim.lsp.get_client_by_id(event.data.client_id) or { name = "" }
         local opts = { buffer = bufnr, silent = true }
         print("LSP attached: " .. client.name)
 
