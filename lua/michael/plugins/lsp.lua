@@ -127,7 +127,7 @@ return {
 				opts.desc = "LSP: Restart LSP"
 				vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
-				client.server_capabilities.semanticTokensProvider = nil
+				client.server_capabilities.semanticTokensProvider = nil -- prevent LSP highlighting
 				-- Optional: per-client logic
 				-- if client.name == "ts_ls" then
 				--   -- Disable ts_ls formatting if using prettier
