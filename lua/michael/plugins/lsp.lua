@@ -28,6 +28,7 @@ return {
 				"html",
 				"cssls",
 				"marksman",
+				"eslint",
 			},
 			automatic_enable = false, -- elect to setup servers myself to be able to pass cmp (autocomplete) capabilities
 		})
@@ -37,7 +38,6 @@ return {
 			ensure_installed = {
 				"prettierd",
 				"stylua",
-				"eslint_d",
 			},
 		})
 
@@ -66,6 +66,22 @@ return {
 					diagnostics = {
 						globals = { "vim" }, -- supposed to add the vim keyword to the globally recognized list. Not working.
 					},
+				},
+			},
+		})
+
+		lspconfig.eslint.setup({
+			on_attach = function(client, bufnr)
+				vim.api.nvim_create_autocmd("BufWritePre", {
+					buffer = bufnr,
+					command = "EslintFixAll", -- Optional: run fixers on save
+				})
+			end,
+			settings = {
+				format = true,
+				codeActionOnSave = {
+					enable = true,
+					mode = "all",
 				},
 			},
 		})
