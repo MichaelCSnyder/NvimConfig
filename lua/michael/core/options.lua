@@ -42,12 +42,12 @@ vim.opt.splitright = true -- split vertical window to the right
 vim.opt.splitbelow = true -- split horizontal window to the bottom
 
 -- Remove auto comment continuation on newline
--- vim.api.nvim_create_autocmd("FileType", {
---   pattern = "*",
---   callback = function()
---     vim.opt.formatoptions:remove({ "c", "r", "o" })
---   end,
--- })
+vim.api.nvim_create_autocmd("FileType", {
+	pattern = "*",
+	callback = function()
+		vim.opt.formatoptions:remove({ "c", "r", "o" })
+	end,
+})
 
 -- highlight on yank
 vim.api.nvim_create_autocmd("TextYankPost", {

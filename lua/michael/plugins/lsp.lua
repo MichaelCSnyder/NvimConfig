@@ -9,6 +9,19 @@ return {
 		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	event = { "BufReadPre", "BufNewFile" },
+	--[[
+    Context: 
+    - Mason is reponsible for downloading LSP (as well as linters, formatters, etc.)
+    - mason-lspconfig acts as a bridge between mason by:
+      1. mapping package names from mason to nvim-lspconfig
+      2. can automatically setup installed lsp servers
+        - I elect out of this because I wish to extend capabilities with manual config. 
+        - Failing to recognize this at first lead to multiple LSP instances running, the active one
+          being the one mason-lspconfig automatically setup without custom config (specifying "vim"
+          keyword as a globally recognized keyword)
+   - nvim-lspconfig is the core plugin that configures and connects LSP servers with Neovim's built-in
+     LSP client
+  ]]
 	config = function()
 		require("mason").setup({
 			ui = {
@@ -43,6 +56,8 @@ return {
 
 		local lspconfig = require("lspconfig")
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
+
+		---------------- setup LSPs with default configs -------------
 		local standard_config_servers = {
 			"ts_ls",
 			"jsonls",
@@ -51,14 +66,13 @@ return {
 			"marksman",
 		}
 
-		-- setup LSPs with default configs
 		for _, server in ipairs(standard_config_servers) do
 			lspconfig[server].setup({
 				capabilities = capabilities, -- allows autocompletion to source LSP data
 			})
 		end
 
-		-- setup LSPs with custom configs
+		---------------- setup LSPs with custom configs -------------
 		lspconfig.lua_ls.setup({
 			capabilities = capabilities,
 			settings = {
@@ -85,7 +99,7 @@ return {
 				},
 			},
 		})
-
+		----------------------------------------------------------------------------
 		vim.diagnostic.config({
 			signs = true,
 			underline = true,
@@ -104,8 +118,7 @@ return {
 			},
 		})
 
-		-- Change the Diagnostic symbols in the sign column (gutter)
-		-- not working
+		-- Change the Diagnostic symbols in the sign column (gutter) - not working on linux
 		local signs = { Error = " ", Warn = " ", Hint = "󰠠 ", Info = " " }
 		for type, icon in pairs(signs) do
 			local hl = "DiagnosticSign" .. type
@@ -158,7 +171,7 @@ return {
 				opts.desc = "LSP: Restart LSP"
 				vim.keymap.set("n", "<leader>rs", ":LspRestart<CR>", opts) -- mapping to restart lsp if necessary
 
-				client.server_capabilities.semanticTokensProvider = nil -- prevent LSP highlighting
+				-- client.server_capabilities.semanticTokensProvider = nil -- prevent LSP highlighting
 				-- Optional: per-client logic
 				-- if client.name == "ts_ls" then
 				--   -- Disable ts_ls formatting if using prettier
