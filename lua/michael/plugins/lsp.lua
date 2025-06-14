@@ -6,6 +6,7 @@ return {
 		"hrsh7th/cmp-nvim-lsp", -- facilitates communication between lsp and autocompletion
 		{ "antosha417/nvim-lsp-file-operations", config = true }, -- modify imports when files have been renamed
 		{ "folke/neodev.nvim", opts = {} }, -- add improved lua lsp functionality
+		"WhoIsSethDaniel/mason-tool-installer.nvim",
 	},
 	event = { "BufReadPre", "BufNewFile" },
 	config = function()
@@ -31,10 +32,17 @@ return {
 			automatic_enable = false, -- elect to setup servers myself to be able to pass cmp (autocomplete) capabilities
 		})
 
+		-- autoinstall formatters and linters
+		require("mason-tool-installer").setup({
+			ensure_installed = {
+				"prettierd",
+				"stylua",
+				"eslint_d",
+			},
+		})
+
 		local lspconfig = require("lspconfig")
-
 		local capabilities = require("cmp_nvim_lsp").default_capabilities()
-
 		local standard_config_servers = {
 			"ts_ls",
 			"jsonls",
