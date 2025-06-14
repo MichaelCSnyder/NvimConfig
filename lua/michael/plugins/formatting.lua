@@ -16,7 +16,8 @@ return {
 				markdown = { "prettierd" },
 				lua = { "stylua" },
 			},
-			format_after_save = {
+			-- format_after_save = {
+			format_on_save = {
 				lsp_format = "fallback",
 				async = true,
 				timeout_ms = 1000,
