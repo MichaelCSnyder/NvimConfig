@@ -70,15 +70,22 @@ return {
 			},
 		})
 
-		-- testing diagnistics display. Adds in-line display.
 		vim.diagnostic.config({
-			virtual_text = {
-				prefix = "●", -- or another Nerd Font icon
-			},
 			signs = true,
 			underline = true,
 			update_in_insert = false,
 			severity_sort = true,
+			-- virtual_text = {
+			-- 	prefix = "●",
+			-- },
+			float = {
+				focusable = false,
+				style = "minimal",
+				border = "rounded",
+				source = "always",
+				header = "",
+				prefix = "",
+			},
 		})
 
 		-- Change the Diagnostic symbols in the sign column (gutter)

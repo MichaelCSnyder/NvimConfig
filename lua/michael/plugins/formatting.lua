@@ -6,8 +6,6 @@ return {
 
 		conform.setup({
 			formatters_by_ft = {
-				-- Conform will run multiple formatters sequentially
-				-- Conform will run the first available formatter
 				javascript = { "prettierd" },
 				typescript = { "prettierd" },
 				javascriptreact = { "prettierd" },
@@ -18,9 +16,10 @@ return {
 				markdown = { "prettierd" },
 				lua = { "stylua" },
 			},
-			format_on_save = {
-				lsp_fallback = true,
-				timeout_ms = 500,
+			format_after_save = {
+				lsp_format = "fallback",
+				async = true,
+				timeout_ms = 1000,
 			},
 		})
 		vim.keymap.set("n", "<leader>mp", function()
